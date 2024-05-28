@@ -1,7 +1,12 @@
 import { Box } from "@chakra-ui/react";
+import { ColorModeToggler } from "./components/ColorModeToggler";
 
 function App() {
-  return <Box>CHAKRA UI APP</Box>;
+  return (
+    <Box>
+      <ColorModeToggler />
+    </Box>
+  );
 }
 
 export default App;
