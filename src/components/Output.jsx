@@ -29,26 +29,28 @@ export const Output = ({ editorRef, language }) => {
   };
 
   return (
-    <Box>
-      <Text mb={2} fontSize="lg">
-        Output
-      </Text>
-      <Button
-        variant="outline"
-        colorScheme="green"
-        mb={4}
-        isLoading={isLoading}
-        onClick={runCode}
-      >
-        Run Code
-      </Button>
+    <Box height="100%" display="flex" flexDir="column">
+      <Box flex={1}>
+        <Text mb={2} fontSize="lg">
+          Output
+        </Text>
+        <Button
+          variant="outline"
+          colorScheme="green"
+          mb={4}
+          isLoading={isLoading}
+          onClick={runCode}
+        >
+          Run Code
+        </Button>
+      </Box>
       <Box
-        height="75vh"
         p={2}
         color={isError ? "red.400" : ""}
         border="1px solid"
-        borderRadius={4}
+        borderRadius={2}
         borderColor={isError ? "red.500" : "#333"}
+        flex={5}
       >
         <pre>
           {result
