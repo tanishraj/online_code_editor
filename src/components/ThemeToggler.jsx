@@ -13,8 +13,16 @@ export const ColorModeToggler = () => {
 
   return (
     <div>
-      <Button onClick={onColorModeChange}>
-        {colorMode === "dark" ? <SunIcon /> : <MoonIcon />}
+      <Button
+        onClick={onColorModeChange}
+        _hover={{ bg: "gray.200" }}
+        _dark={{ _hover: { bg: "gray.700" } }}
+      >
+        {colorMode === "dark" ? (
+          <SunIcon color="black" _dark={{ color: "white" }} />
+        ) : (
+          <MoonIcon color="black" _dark={{ color: "white" }} />
+        )}
       </Button>
     </div>
   );
