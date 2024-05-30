@@ -10,8 +10,10 @@ function App() {
         flexDir="row"
         alignItems="center"
         justifyContent="space-between"
-        background="gray.100"
+        bg="gray.100"
+        _dark={{ bg: "black" }}
         mb="8"
+        px={4}
       >
         <Heading
           flex={4}
@@ -25,7 +27,7 @@ function App() {
         <ColorModeToggler flex="1" />
       </Box>
 
-      <Box>
+      <Box p={4}>
         <CodeEditor />
       </Box>
     </Box>
