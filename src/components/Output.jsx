@@ -1,24 +1,50 @@
 import { useState } from "react";
-import { Box, Button, Text, useToast } from "@chakra-ui/react";
+import { Box, Button, Text, useToast, HStack, ButtonGroup, Tooltip, IconButton } from "@chakra-ui/react";
+import { DownloadIcon } from "@chakra-ui/icons";
+import { FaPlay, FaStop } from "react-icons/fa";
 import { executeCode } from "../api";
+import { DevTools } from "./DevTools";
 
 export const Output = ({ editorRef, language }) => {
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState(null);
-  const [isError, setIsError] = useState(false);
+  const [output, setOutput] = useState("");
+  const [error, setError] = useState(null);
+  const [executionTime, setExecutionTime] = useState(null);
 
   const runCode = async () => {
-    const sourceCode = editorRef.current.getValue();
-    if (!sourceCode) return;
+    const sourceCode = editorRef.current?.getValue();
+    if (!sourceCode) {
+      toast({
+        title: "No code to run",
+        description: "Please write some code first",
+        status: "warning",
+        duration: 3000
+      });
+      return;
+    }
+    
     try {
       setIsLoading(true);
+      setError(null);
+      const startTime = performance.now();
+      
       const { run: result } = await executeCode(language, sourceCode);
-      setResult(result.output.split("\n"));
-      result.stderr ? setIsError(true) : setIsError(false);
+      
+      const endTime = performance.now();
+      setExecutionTime(Math.round(endTime - startTime));
+      
+      if (result.stderr) {
+        setError(result.stderr);
+        setOutput(result.stdout || "");
+      } else {
+        setOutput(result.output || result.stdout || "");
+        setError(null);
+      }
     } catch (error) {
+      setError(error.message || "Unable to run code");
       toast({
-        title: "An error occurred.",
+        title: "Execution failed",
         description: error.message || "Unable to run code",
         status: "error",
         duration: 6000
@@ -28,35 +54,61 @@ export const Output = ({ editorRef, language }) => {
     }
   };
 
+  const stopExecution = () => {
+    setIsLoading(false);
+    toast({
+      title: "Execution stopped",
+      status: "info",
+      duration: 2000
+    });
+  };
+
+  const downloadOutput = () => {
+    const content = output || error || "No output";
+    const blob = new Blob([content], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `output.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <Box height="100%" display="flex" flexDir="column">
-      <Box flex={1}>
-        <Text mb={2} fontSize="lg">
-          Output
+      <HStack mb={2} justify="space-between">
+        <Text fontSize="lg" fontWeight="bold">
+          Developer Console
         </Text>
-        <Button
-          variant="outline"
-          colorScheme="green"
-          mb={4}
+        <ButtonGroup size="sm">
+          <Button
+            id="run-button"
+            leftIcon={isLoading ? <FaStop /> : <FaPlay />}
+            colorScheme={isLoading ? "red" : "green"}
+            isLoading={isLoading}
+            onClick={isLoading ? stopExecution : runCode}
+            loadingText="Running..."
+          >
+            {isLoading ? "Stop" : "Run"}
+          </Button>
+          <Tooltip label="Download output">
+            <IconButton
+              icon={<DownloadIcon />}
+              variant="outline"
+              onClick={downloadOutput}
+              aria-label="Download output"
+            />
+          </Tooltip>
+        </ButtonGroup>
+      </HStack>
+      
+      <Box flex={1} minH={0}>
+        <DevTools
+          output={output}
+          error={error}
           isLoading={isLoading}
-          onClick={runCode}
-        >
-          Run Code
-        </Button>
-      </Box>
-      <Box
-        p={2}
-        color={isError ? "red.400" : ""}
-        border="1px solid"
-        borderRadius={2}
-        borderColor={isError ? "red.500" : "#333"}
-        flex={5}
-      >
-        <pre>
-          {result
-            ? result.map((line, i) => <Text key={i}>{line}</Text>)
-            : 'Click "Run Code" to see the output here'}
-        </pre>
+          executionTime={executionTime}
+        />
       </Box>
     </Box>
   );
