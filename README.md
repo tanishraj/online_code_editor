@@ -1,44 +1,186 @@
-# Online Code Editor
+# CodeCraft Pro - Online Code Editor
 
-This is an online code editor built with React, Chakra UI, and the Monaco Editor. It allows users to write, edit, and execute code in various programming languages directly in their web browser.
+A modern, feature-rich online code editor built with React, Chakra UI, and Monaco Editor. Write, edit, and preview code directly in your browser with a VS Code-like experience.
 
-## Demo
+## 🚀 Live Demo
 
-![Online Code Editor Demo](./src/assets/screenshot.gif)
+Visit the live application: [CodeCraft Pro](https://github.com/tanishraj/online_code_editor)
 
-## Features
+## ✨ Features
 
-- **Code Editor**: A powerful code editor powered by the Monaco Editor, providing a rich editing experience with syntax highlighting, code folding, and other advanced features.
-- **Language Support**: Support for multiple programming languages, including JavaScript, Python, Java, C++, and more.
-- **Real-Time Execution**: Execute code directly in the browser and see the output in real-time.
-- **Code Formatting**: Automatically format code with a single click, following best coding practices and conventions.
-- **File Management**: Create, open, save, and manage code files within the editor.
-- **Responsive Design**: The editor is fully responsive and works seamlessly across different devices and screen sizes.
+### Core Features
+- **Monaco Editor Integration**: Full-featured code editor with IntelliSense, syntax highlighting, and auto-completion
+- **Multi-File Support**: Create and manage multiple files and folders in a project structure
+- **File Explorer**: VS Code-style file tree with drag-and-drop support
+- **Tab Management**: Work with multiple files simultaneously using tabs
+- **Auto-Save**: Automatic saving of files and project state to local storage
+- **Theme Support**: Light and dark mode themes
 
-## Packages Used
+### Code Execution
+- **Real-Time Preview**: Live HTML/CSS/JS preview in an isolated iframe
+- **Console Output**: Integrated console for viewing JavaScript logs and errors
+- **Developer Tools**: Built-in developer tools with console, output, and terminal views
+- **Rocket Mode**: Turbo execution mode for faster code processing
 
-- **React**: A JavaScript library for building user interfaces.
-- **Chakra UI**: A simple, modular, and accessible component library for React.
-- **Monaco Editor**: A code editor component for React, powered by the Monaco Editor from Microsoft.
-- **Axios**: A popular library for making HTTP requests from the browser.
-- **Framer Motion**: A production-ready motion library for React.
+### File Management
+- **Project Templates**: Pre-built HTML and JavaScript project templates
+- **Import/Export**: Import existing projects or export your work
+- **File Operations**: Create, rename, delete files and folders
+- **Smart Language Detection**: Automatic programming language detection based on file extension
 
-## Installation
+### Preview Modes
+- **Developer Tools Mode**: Bundle and preview code locally using blob URLs
+- **Console/Preview Toggle**: Switch between console output and live preview
+- **Responsive Preview**: Test your web apps in different device sizes
+- **Fullscreen Mode**: Distraction-free coding experience
 
-1. Clone the repository: `git clone https://github.com/username/online-code-editor.git`
-2. Navigate to the project directory: `cd online-code-editor`
-3. Install dependencies: `npm install`
+## 🛠️ Tech Stack
 
-## Usage
+- **Frontend Framework**: React 19
+- **UI Library**: Chakra UI v2
+- **Code Editor**: Monaco Editor (VS Code's editor)
+- **Icons**: React Icons
+- **Animations**: Framer Motion
+- **Build Tool**: Vite
+- **Package Manager**: Yarn
+- **State Management**: React Hooks
+- **File System**: Custom virtual file system implementation
 
-1. Start the development server: `npm run dev`
-2. Open your web browser and navigate to `http://localhost:5173`
-3. Start coding in the editor!
+## 📦 Installation
 
-## Contributing
+1. Clone the repository:
+```bash
+git clone https://github.com/tanishraj/online_code_editor.git
+cd online_code_editor
+```
 
-Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
+2. Install dependencies using Yarn:
+```bash
+yarn install
+```
 
-## License
+3. Start the development server:
+```bash
+yarn dev
+```
 
-This project is licensed under the [MIT License](LICENSE).
+4. Open your browser and navigate to:
+```
+http://localhost:5173
+```
+
+## 📝 Available Scripts
+
+- `yarn dev` - Start development server
+- `yarn build` - Build for production
+- `yarn preview` - Preview production build
+- `yarn lint` - Run ESLint
+
+## 🎨 Project Structure
+
+```
+online_code_editor/
+├── src/
+│   ├── api/              # API integration
+│   ├── components/       # React components
+│   │   ├── ModernOutput.jsx       # Console and output panel
+│   │   ├── PreviewMode.jsx        # Live preview component
+│   │   ├── ProjectEditor.jsx      # Main editor component
+│   │   └── StackBlitzExplorer.jsx # File explorer
+│   ├── hooks/           # Custom React hooks
+│   ├── styles/          # CSS and styling
+│   ├── theme/           # Chakra UI theme configuration
+│   ├── utils/           # Utility functions
+│   │   ├── fileSystem.js  # Virtual file system
+│   │   └── storage.js     # Local storage management
+│   ├── App.jsx          # Main app component
+│   └── main.jsx         # App entry point
+├── public/              # Static assets
+├── package.json         # Dependencies and scripts
+└── vite.config.js      # Vite configuration
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+Create a `.env` file in the root directory:
+
+```env
+VITE_API_URL=your_api_url_here
+```
+
+### VS Code Integration
+For the best development experience, install these VS Code extensions:
+- ESLint
+- Prettier
+- ES7+ React/Redux/React-Native snippets
+
+## 🎯 Usage
+
+### Creating a New Project
+1. Click on the file explorer
+2. Right-click to create new files/folders
+3. Start coding in the editor
+
+### Loading Templates
+- Click "HTML Template" for a basic HTML/CSS/JS project
+- Click "JavaScript" for JavaScript snippets
+
+### Running Code
+- Click "Run Code" to execute JavaScript
+- Use "Preview" mode for HTML/CSS/JS projects
+- Toggle between Console and Preview views
+
+### Keyboard Shortcuts
+- `Ctrl/Cmd + S` - Save file (auto-save is enabled)
+- `Ctrl/Cmd + Enter` - Run code
+- `Ctrl/Cmd + /` - Toggle comment
+- `Ctrl/Cmd + F` - Find
+- `Ctrl/Cmd + H` - Replace
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 🐛 Known Issues
+
+- Large bundle size (739KB) - consider implementing code splitting
+- Preview mode requires HTML files in the project
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Tanish Raj**
+- GitHub: [@tanishraj](https://github.com/tanishraj)
+
+## 🙏 Acknowledgments
+
+- Monaco Editor team for the amazing code editor
+- Chakra UI team for the beautiful component library
+- React team for the powerful framework
+- All contributors and users of this project
+
+## 📊 Project Status
+
+- ✅ Core editor functionality
+- ✅ File management system
+- ✅ Live preview
+- ✅ Console integration
+- ✅ Theme support
+- ✅ Auto-save
+- 🔄 Code execution API integration (in progress)
+- 📋 Collaborative editing (planned)
+- 📋 Cloud storage (planned)
+
+---
+
+Made with ❤️ by Tanish Raj
