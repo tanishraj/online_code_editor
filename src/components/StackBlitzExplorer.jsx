@@ -9,17 +9,11 @@ import {
   InputGroup,
   InputLeftElement,
   useColorMode,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
   Tooltip,
   Button,
   Divider,
   Collapse,
   Badge,
-  Flex,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -36,10 +30,7 @@ import {
 import {
   ChevronRightIcon,
   ChevronDownIcon,
-  SearchIcon,
-  AddIcon,
-  SettingsIcon,
-  DownloadIcon
+  SearchIcon
 } from '@chakra-ui/icons';
 import {
   FaFolder,
@@ -48,7 +39,6 @@ import {
   FaJs,
   FaReact,
   FaVuejs,
-  FaAngular,
   FaHtml5,
   FaCss3Alt,
   FaPython,
@@ -67,13 +57,9 @@ import {
   FaPaste,
   FaTrash,
   FaEdit,
-  FaPlus,
   FaUpload,
   FaCloudUploadAlt,
-  FaSyncAlt,
-  FaCodeBranch,
-  FaSearch,
-  FaFilter
+  FaSyncAlt
 } from 'react-icons/fa';
 import {
   SiTypescript,
@@ -81,24 +67,15 @@ import {
   SiYaml,
   SiGraphql,
   SiPrisma,
-  SiPostgresql,
-  SiMongodb,
-  SiRedis,
-  SiDocker,
-  SiKubernetes,
   SiWebpack,
   SiVite,
   SiEslint,
   SiPrettier,
   SiJest,
   SiCypress,
-  SiStorybook,
   SiTailwindcss,
   SiSass,
   SiLess,
-  SiStyledcomponents,
-  SiExpress,
-  SiNestjs,
   SiNextdotjs,
   SiNuxtdotjs,
   SiGatsby,
@@ -110,13 +87,11 @@ import {
   SiSwift,
   SiKotlin,
   SiDart,
-  SiFlutter,
   SiFirebase,
   SiSupabase,
   SiVercel,
   SiNetlify
 } from 'react-icons/si';
-import { motion, AnimatePresence } from 'framer-motion';
 import { FILE_TYPES, getFileExtension } from '../utils/fileSystem';
 
 // Helper function to sort files and folders
@@ -134,8 +109,7 @@ const sortFileSystemNodes = (nodes) => {
 };
 
 // Comprehensive file icon mapping
-const getFileIcon = (filename, isFolder, isOpen) => {
-  const { colorMode } = useColorMode();
+const getFileIcon = (filename, isFolder, isOpen, colorMode) => {
   const iconSize = 14;
   
   if (isFolder) {
@@ -352,7 +326,7 @@ const FileTreeNode = ({
         )}
         
         <Box>
-          {getFileIcon(node.name, node.type === FILE_TYPES.FOLDER, node.isOpen)}
+          {getFileIcon(node.name, node.type === FILE_TYPES.FOLDER, node.isOpen, colorMode)}
         </Box>
         
         <Text 
@@ -608,7 +582,7 @@ export const StackBlitzExplorer = ({
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
-        const data = JSON.parse(e.target.result);
+        JSON.parse(e.target.result);
         // Import logic would go here
         toast({
           title: "Project imported",

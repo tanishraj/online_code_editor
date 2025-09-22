@@ -11,8 +11,7 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  IconButton,
-  Tooltip
+  IconButton
 } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { Editor } from '@monaco-editor/react';
@@ -36,7 +35,7 @@ export const ProjectEditor = () => {
   });
   
   // Use a version counter to force re-renders when fileSystem changes
-  const [version, setVersion] = useState(0);
+  const [, setVersion] = useState(0);
   
   const [openFiles, setOpenFiles] = useState(() => {
     try {
@@ -52,7 +51,7 @@ export const ProjectEditor = () => {
     return saved || (openFiles.length > 0 ? openFiles[0].id : null);
   });
   
-  const [editorSettings, setEditorSettings] = useState(() => {
+  const [editorSettings] = useState(() => {
     return storage.loadSettings();
   });
 
@@ -188,6 +187,7 @@ export const ProjectEditor = () => {
       window.removeEventListener('loadTemplate', handleLoadTemplate);
       window.removeEventListener('loadCodeSnippet', handleLoadSnippet);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeFileId, fileSystem, handleFileSelect, handleFileSystemChange]);
 
   // Create file system JSON for auto-save

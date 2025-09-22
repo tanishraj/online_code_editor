@@ -120,8 +120,8 @@ const LogEntry = ({ log, colorMode }) => {
   );
 };
 
-// Code snippets
-const CODE_SNIPPETS = {
+// Removed CODE_SNIPPETS - now handled by App.jsx
+/* const CODE_SNIPPETS = {
   html: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -297,7 +297,7 @@ app.listTodos();
 app.getStats();
 
 console.log('\\n💡 Try adding more todos or marking them complete!');`
-};
+}; */
 
 export const ModernOutput = ({ editorRef, language, fileSystem }) => {
   const { colorMode } = useColorMode();
@@ -450,32 +450,7 @@ export const ModernOutput = ({ editorRef, language, fileSystem }) => {
     });
   };
 
-  const loadSnippet = (snippetType) => {
-    const snippet = CODE_SNIPPETS[snippetType];
-    if (snippet && editorRef.current) {
-      editorRef.current.setValue(snippet);
-      
-      // Update the active file in the file system if needed
-      if (fileSystem && fileSystem.getOpenFiles && fileSystem.getOpenFiles().length > 0) {
-        const activeFile = fileSystem.getOpenFiles()[0];
-        if (activeFile && fileSystem.updateFileContent) {
-          fileSystem.updateFileContent(activeFile.id, snippet);
-        }
-      }
-      
-      toast({
-        title: `${snippetType === 'javascriptApp' ? 'JavaScript App' : snippetType.toUpperCase()} Snippet Loaded`,
-        description: "Example code has been loaded into the editor",
-        status: "success",
-        duration: 2000,
-        isClosable: true,
-        position: "top-right"
-      });
-      
-      // Clear previous output when loading a new snippet
-      clearConsole();
-    }
-  };
+  // Removed unused loadSnippet function - snippets are now loaded through App.jsx
 
   const downloadOutput = () => {
     const content = logs.map(log => `[${log.timestamp}] ${log.type.toUpperCase()}: ${log.message}`).join('\n');

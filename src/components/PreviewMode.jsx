@@ -27,7 +27,6 @@ import {
   FaExternalLinkAlt,
   FaDownload,
   FaBug,
-  FaExclamationTriangle,
   FaGlobe,
   FaCode
 } from 'react-icons/fa';
@@ -61,11 +60,10 @@ export const PreviewMode = ({ fileSystem, isFullscreen, onToggleFullscreen, onTo
   const [activeDevice, setActiveDevice] = useState('desktop');
   const [viewMode] = useState('preview'); // 'preview' | 'code' | 'split'
   const [consoleOutput, setConsoleOutput] = useState([]);
-  const [isOnline] = useState(true);
   const [iframeKey, setIframeKey] = useState(0);
   const [bundledCode, setBundledCode] = useState('');
   const [previewMode] = useState('devtools'); // 'devtools' | 'localhost'
-  const [localhostPort] = useState('3000');
+  const [localhostPort, setLocalhostPort] = useState('3000');
 
   // Find HTML, CSS, and JS files in the file system
   const findFiles = useMemo(() => {
@@ -250,6 +248,7 @@ try {
   // Auto-update preview when files change
   useEffect(() => {
     updatePreview();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileSystem]);
 
   const handleRefresh = () => {
