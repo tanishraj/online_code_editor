@@ -4,7 +4,7 @@ A modern, feature-rich online code editor built with React, Chakra UI, and Monac
 
 ## 🚀 Live Demo
 
-Visit the live application: [CodeCraft Pro](https://github.com/tanishraj/online_code_editor)
+Visit the live application: [CodeCraft Pro](https://my-js-editor.vercel.app/)
 
 ## ✨ Features
 
