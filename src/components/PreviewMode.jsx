@@ -28,7 +28,8 @@ import {
   FaDownload,
   FaBug,
   FaGlobe,
-  FaCode
+  FaCode,
+  FaPlay
 } from 'react-icons/fa';
 import { 
   IoMdRefresh,
@@ -392,6 +393,21 @@ try {
                 Preview
               </Button>
             </ButtonGroup>
+            
+            {/* Run Code Button */}
+            <Button
+              size="sm"
+              leftIcon={<FaPlay />}
+              variant="gradient"
+              onClick={() => updatePreview()}
+              title="Refresh Preview"
+              boxShadow="0 4px 15px rgba(168, 85, 247, 0.3)"
+              _hover={{
+                boxShadow: "0 6px 20px rgba(168, 85, 247, 0.4)"
+              }}
+            >
+              Run Code
+            </Button>
             
             {/* Port input for localhost mode */}
             {previewMode === 'localhost' && (
